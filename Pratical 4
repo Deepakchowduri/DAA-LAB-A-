@@ -1,0 +1,28 @@
+code:
+#include <iostream>
+using namespace std;
+// Recursive Function
+int recursiveSum(int n)
+{
+if(n == 0)
+return 0;
+return n + recursiveSum(n - 1);
+}
+// Iterative Function
+int iterativeSum(int n)
+{
+int sum = 0;
+for(int i = 1; i <= n; i++)
+sum += i;
+return sum;
+}
+{
+int main()
+int n;
+cout << "Enter a number: ";
+cin >> n;
+cout << "\nIterative Sum = "
+<< iterativeSum(n);
+cout << "\nRecursive Sum = "
+<< recursiveSum(n);
+return 0;
