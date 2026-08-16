@@ -1,0 +1,88 @@
+#include <iostream> 
+#include <vector> 
+#include <chrono> 
+ 
+using namespace std; 
+using namespace chrono; 
+ 
+// Linear Search 
+int LinearSearch(vector<int> &a, int key) 
+{ 
+    int i = 0; 
+ 
+    while(i < a.size()) 
+    { 
+        if(a[i] == key)             return i; 
+ 
+        i++; 
+    } 
+ 
+    return -1; 
+} 
+ 
+// Recursive Binary Search 
+int BinarySearch(vector<int> &a, int low, int high, int key) 
+{     if(low > high) 
+        return -1; 
+ 
+    int mid = low + (high - low) / 2; 
+ 
+                                                                                                                           
+    if(a[mid] == key) 
+        return mid; 
+ 
+    if(key < a[mid]) 
+        return BinarySearch(a, low, mid - 1, key); 
+ 
+    return BinarySearch(a, mid + 1, high, key); 
+} 
+ 
+int main() {     int n; 
+ 
+    cout << "Enter Size of Array : "; 
+    cin >> n; 
+ 
+    vector<int> arr(n); 
+ 
+    cout << "Enter Sorted Elements:\n"; 
+ 
+    for(int i = 0; i < n; i++) 
+        cin >> arr[i]; 
+ 
+    int key; 
+ 
+    cout << "Enter Element to Search : ";     cin >> key; 
+ 
+    auto start = high_resolution_clock::now(); 
+ 
+    int result = LinearSearch(arr, key); 
+ 
+    auto stop = high_resolution_clock::now(); 
+ 
+    cout << "\nLINEAR SEARCH RESULT\n"; 
+ 
+    if(result == -1)         cout << "Element Not Found\n";     else 
+        cout << "Element Found at Index : " << result << endl; 
+ 
+    cout << "Time Taken : " 
+         << duration_cast<microseconds>(stop - start).count() 
+         << " microseconds\n"; 
+ 
+    start = high_resolution_clock::now(); 
+ 
+    result = BinarySearch(arr, 0, n - 1, key); 
+ 
+    stop = high_resolution_clock::now(); 
+ 
+    cout << "\nBINARY SEARCH RESULT\n"; 
+ 
+    if(result == -1) 
+        cout << "Element Not Found\n";     else 
+        cout << "Element Found at Index : " << result << endl; 
+ 
+    cout << "Time Taken : " 
+         << duration_cast<microseconds>(stop - start).count() 
+         << " microseconds\n"; 
+ 
+    return 0; 
+}
